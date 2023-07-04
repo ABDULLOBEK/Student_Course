@@ -1,0 +1,32 @@
+### Create course
+POST localhost:8080/course/create
+Content-Type: application/json
+
+{
+  "name": "Ali",
+  "price": 12.12,
+  "duration": "12 month"
+}
+
+
+### Get all course
+GET localhost:8080/course/all
+
+### Get by id
+GET localhost:8080/course/1
+
+
+### Update by id
+PUT localhost:8080/course/1
+Content-Type: application/json
+
+{
+  "name": "Abdullo",
+  "price": 12.24
+}
+
+### Delete by id
+DELETE localhost:8080/course/7
+
+### Get by name
+GET localhost:8080/course/name?name=Ali

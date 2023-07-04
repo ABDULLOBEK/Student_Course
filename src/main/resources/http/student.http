@@ -1,0 +1,37 @@
+### Create student
+POST localhost:8080/student/create
+Content-Type: application/json
+
+{
+  "name": "Ali",
+  "surname": "Aliyev",
+  "level": "Junior",
+  "age": 18,
+  "gender": "male"
+}
+
+
+### Get all student
+GET localhost:8080/student/all
+
+### Get by id
+GET localhost:8080/student/3
+
+
+### Update by id
+PUT localhost:8080/student/8
+Content-Type: application/json
+
+{
+  "name": "Abdullo",
+  "surname": "Navruzov"
+}
+
+### Delete by id
+DELETE localhost:8080/student/7
+
+### Get by name
+GET localhost:8080/student/name?name=Ali
+
+### Get by date
+GET localhost:8080/student/date/2023-07-03
