@@ -11,4 +11,7 @@ public interface CourseRepository extends CrudRepository<CourseEntity, Integer> 
     List<CourseEntity> getByPrice(Double price);
 
     List<CourseEntity> getByDuration(String duration);
+
+    List<CourseEntity> findByPriceBetween(Double priceI, Double priceF);
+
 }

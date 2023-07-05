@@ -5,6 +5,7 @@ import com.example.dto.StudentDTO;
 import com.example.entity.CourseEntity;
 import com.example.entity.StudentEntity;
 import com.example.exp.ItemNotFoundException;
+import com.example.mapper.PriceMapping;
 import com.example.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -83,6 +84,11 @@ public class CourseService  {
         return getCourseDTOS(entityList);
     }
 
+    public Object getByBetweenPrice(Double priceI, Double priceF) {
+        List<CourseEntity> entityList = courseRepository.findByPriceBetween(priceI, priceF);
+        return getCourseDTOS(entityList);
+    }
+
     public CourseDTO toDTO(CourseEntity entity){
         CourseDTO dto = new CourseDTO();
         dto.setId(entity.getId());
@@ -112,6 +118,5 @@ public class CourseService  {
         }
         return dtoList;
     }
-
 
 }

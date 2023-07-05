@@ -30,3 +30,6 @@ DELETE localhost:8080/course/7
 
 ### Get by name
 GET localhost:8080/course/name?name=Ali
+
+### Get by prices
+GET localhost:8080/course/prices?priceI=10.0&priceF=12.25
