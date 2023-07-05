@@ -1,6 +1,7 @@
 package com.example.service;
 
 import com.example.dto.StudentDTO;
+import com.example.entity.CourseEntity;
 import com.example.entity.StudentEntity;
 import com.example.exp.ItemNotFoundException;
 import com.example.repository.StudentRepository;
@@ -95,10 +96,23 @@ public class StudentService {
         return getStudentDTOS(entityList);
     }
 
-    public List<StudentDTO> getByDate(LocalDateTime  startDateTime,LocalDateTime endDateTime) {
-//        List<StudentEntity> entityList = studentRepository.getByCreatedDate(localDateTime);
-//        return getStudentDTOS(entityList);
-        return studentRepository.findByCreatedDateBetween(startDateTime, endDateTime);
+    public List<StudentDTO> getByDate(String date) {
+        String pattern = "yyyy-MM-dd";
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        LocalDate localDateTime = LocalDate.parse(date, formatter);
+        List<StudentEntity> entityList = studentRepository.findByCreatedDate(localDateTime);
+        return getStudentDTOS(entityList);
+    }
+
+    public Object getByBetweenDate(String dateI, String dateF) {
+        String pattern = "yyyy-MM-dd";
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        LocalDate localDateTimeI = LocalDate.parse(dateI, formatter);
+        LocalDate localDateTimeF = LocalDate.parse(dateF, formatter);
+        List<StudentEntity> entityList = studentRepository.findByCreatedDateBetween(localDateTimeI, localDateTimeF);
+        return getStudentDTOS(entityList);
     }
 
 
@@ -119,7 +133,7 @@ public class StudentService {
         entity.setGender(dto.getGender());
         entity.setLevel(dto.getLevel());
         entity.setAge(dto.getAge());
-        entity.setCreatedDate(LocalDateTime.now());
+        entity.setCreatedDate(LocalDate.now());
         return entity;
     }
 

@@ -5,12 +5,13 @@ import com.example.dto.StudentDTO;
 import com.example.entity.CourseEntity;
 import com.example.entity.StudentEntity;
 import com.example.exp.ItemNotFoundException;
-import com.example.mapper.PriceMapping;
 import com.example.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -89,6 +90,16 @@ public class CourseService  {
         return getCourseDTOS(entityList);
     }
 
+    public Object getByBetweenDate(String dateI, String dateF) {
+        String pattern = "yyyy-MM-dd";
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        LocalDate localDateTimeI = LocalDate.parse(dateI, formatter);
+        LocalDate localDateTimeF = LocalDate.parse(dateF, formatter);
+        List<CourseEntity> entityList = courseRepository.findByCreatedDateBetween(localDateTimeI, localDateTimeF);
+        return getCourseDTOS(entityList);
+    }
+
     public CourseDTO toDTO(CourseEntity entity){
         CourseDTO dto = new CourseDTO();
         dto.setId(entity.getId());
@@ -104,7 +115,7 @@ public class CourseService  {
         entity.setName(dto.getName());
         entity.setDuration(dto.getDuration());
         entity.setPrice(dto.getPrice());
-        entity.setCreatedDate(LocalDateTime.now());
+        entity.setCreatedDate(LocalDate.now());
         return entity;
     }
 
@@ -118,5 +129,4 @@ public class CourseService  {
         }
         return dtoList;
     }
-
 }

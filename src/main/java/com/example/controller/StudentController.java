@@ -85,14 +85,17 @@ public class StudentController {
         return ResponseEntity.ok(studentService.getByGender(gender));
     }
 
-    @GetMapping("/date/{date}")
-    public ResponseEntity<?> getByDate(@PathVariable("date")
+    @GetMapping("/date/")
+    public ResponseEntity<?> getByDate(@RequestParam("date")
                                                String  date){
-        LocalDate dateTime = LocalDate.parse(date);
-        LocalDateTime startDateTime = dateTime.atStartOfDay();
-        LocalDateTime endDateTime = dateTime.plusDays(1).atStartOfDay();
-        List<StudentDTO> dtoList = studentService.getByDate(startDateTime, endDateTime);
-        return ResponseEntity.ok(dtoList);
+
+        return ResponseEntity.ok(studentService.getByDate(date));
+    }
+
+    @GetMapping("/dates")
+    public ResponseEntity<?> getByBetweenDate(@RequestParam String dateI,
+                                              @RequestParam String dateF){
+        return ResponseEntity.ok(studentService.getByBetweenDate(dateI,dateF));
     }
 
 }

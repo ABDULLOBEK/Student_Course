@@ -3,9 +3,9 @@ POST localhost:8080/course/create
 Content-Type: application/json
 
 {
-  "name": "Ali",
-  "price": 12.12,
-  "duration": "12 month"
+  "name": "Vali",
+  "price": 90.8,
+  "duration": "1 month"
 }
 
 
@@ -33,3 +33,6 @@ GET localhost:8080/course/name?name=Ali
 
 ### Get by prices
 GET localhost:8080/course/prices?priceI=10.0&priceF=12.25
+
+### GEt by dates
+GET localhost:8080/course/dates?dateI=2023-07-03&dateF=2023-07-04

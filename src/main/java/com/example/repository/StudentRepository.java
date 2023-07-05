@@ -24,9 +24,9 @@ public interface StudentRepository extends CrudRepository<StudentEntity, Integer
 
     List<StudentEntity> getByGender(String gender);
 
-//    List<StudentDTO> getByDate(LocalDateTime date);
+    List<StudentEntity> findByCreatedDate(LocalDate localDateTime);
 
-    List<StudentDTO> findByCreatedDateBetween(LocalDateTime startDateTime, LocalDateTime endDateTime);
+    List<StudentEntity> findByCreatedDateBetween(LocalDate startDateTime, LocalDate endDateTime);
 
 //    
 }

@@ -79,8 +79,10 @@ public class CourseController {
                                                @RequestParam("priceF") Double priceF){
         return ResponseEntity.ok(courseService.getByBetweenPrice(priceI, priceF));
     }
-//    8. Get Course list between 2 createdDates
 
-//    @GetMapping("/dates")
-//    public ResponseEntity<?> getByBetweenDate(@RequestParam)
+    @GetMapping("/dates")
+    public ResponseEntity<?> getByBetweenDate(@RequestParam String dateI,
+                                              @RequestParam String dateF){
+        return ResponseEntity.ok(courseService.getByBetweenDate(dateI,dateF));
+    }
 }
