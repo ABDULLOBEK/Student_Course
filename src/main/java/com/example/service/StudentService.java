@@ -123,6 +123,8 @@ public class StudentService {
         dto.setSurname(entity.getSurname());
         dto.setAge(entity.getAge());
         dto.setCreatedDate(entity.getCreatedDate());
+        dto.setGender(entity.getGender());
+        dto.setLevel(entity.getLevel());
         return dto;
     }
 

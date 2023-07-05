@@ -85,7 +85,7 @@ public class StudentController {
         return ResponseEntity.ok(studentService.getByGender(gender));
     }
 
-    @GetMapping("/date/")
+    @GetMapping("/date")
     public ResponseEntity<?> getByDate(@RequestParam("date")
                                                String  date){
 
