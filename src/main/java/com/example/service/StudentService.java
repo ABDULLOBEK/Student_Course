@@ -97,24 +97,25 @@ public class StudentService {
     }
 
     public List<StudentDTO> getByDate(String date) {
-        String pattern = "yyyy-MM-dd";
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
-        LocalDate localDateTime = LocalDate.parse(date, formatter);
-        List<StudentEntity> entityList = studentRepository.findByCreatedDate(localDateTime);
+        List<StudentEntity> entityList = studentRepository.findByCreatedDate(parse(date));
         return getStudentDTOS(entityList);
     }
 
-    public Object getByBetweenDate(String dateI, String dateF) {
-        String pattern = "yyyy-MM-dd";
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
-        LocalDate localDateTimeI = LocalDate.parse(dateI, formatter);
-        LocalDate localDateTimeF = LocalDate.parse(dateF, formatter);
-        List<StudentEntity> entityList = studentRepository.findByCreatedDateBetween(localDateTimeI, localDateTimeF);
+    public List<StudentDTO> getByBetweenDate(String dateI, String dateF) {
+        List<StudentEntity> entityList = studentRepository.findByCreatedDateBetween(parse(dateI), parse(dateF));
         return getStudentDTOS(entityList);
     }
 
+
+
+
+//  help
+
+    public LocalDate parse(String dateStr){
+        String pattern = "yyyy-MM-dd";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        return LocalDate.parse(dateStr,formatter);
+    }
 
     public StudentDTO toDTO(StudentEntity entity){
         StudentDTO dto = new StudentDTO();

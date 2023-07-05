@@ -65,9 +65,9 @@ public class CourseService  {
         Optional<CourseEntity> optional = courseRepository.findById(id);
         if(optional.isPresent()){
             courseRepository.delete(optional.get());
-            return true;}
+            return true;
+        }
         return false;
-
     }
 
     public List<CourseDTO> getByName(String name) {
@@ -91,13 +91,19 @@ public class CourseService  {
     }
 
     public Object getByBetweenDate(String dateI, String dateF) {
-        String pattern = "yyyy-MM-dd";
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
-        LocalDate localDateTimeI = LocalDate.parse(dateI, formatter);
-        LocalDate localDateTimeF = LocalDate.parse(dateF, formatter);
-        List<CourseEntity> entityList = courseRepository.findByCreatedDateBetween(localDateTimeI, localDateTimeF);
+        List<CourseEntity> entityList = courseRepository.findByCreatedDateBetween(parse(dateI), parse(dateF));
         return getCourseDTOS(entityList);
+    }
+
+
+
+
+//    help
+
+    public LocalDate parse(String dateStr){
+        String pattern = "yyyy-MM-dd";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        return LocalDate.parse(dateStr,formatter);
     }
 
     public CourseDTO toDTO(CourseEntity entity){
