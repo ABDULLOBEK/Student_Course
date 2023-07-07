@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
@@ -90,8 +91,10 @@ public class CourseService  {
         return getCourseDTOS(entityList);
     }
 
-    public Object getByBetweenDate(String dateI, String dateF) {
-        List<CourseEntity> entityList = courseRepository.findByCreatedDateBetween(parse(dateI), parse(dateF));
+    public List<CourseDTO> getByBetweenDate(LocalDate dateI, LocalDate dateF) {
+        LocalDateTime from = LocalDateTime.of(dateI, LocalTime.MIN);
+        LocalDateTime to = LocalDateTime.of(dateF, LocalTime.MAX);
+        List<CourseEntity> entityList = courseRepository.findByCreatedDateBetween(from,to);
         return getCourseDTOS(entityList);
     }
 
@@ -99,12 +102,6 @@ public class CourseService  {
 
 
 //    help
-
-    public LocalDate parse(String dateStr){
-        String pattern = "yyyy-MM-dd";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
-        return LocalDate.parse(dateStr,formatter);
-    }
 
     public CourseDTO toDTO(CourseEntity entity){
         CourseDTO dto = new CourseDTO();

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.xml.crypto.Data;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.LinkedList;
@@ -96,13 +97,17 @@ public class StudentService {
         return getStudentDTOS(entityList);
     }
 
-    public List<StudentDTO> getByDate(String date) {
-        List<StudentEntity> entityList = studentRepository.findByCreatedDate(parse(date));
+    public List<StudentDTO> getByDate(LocalDate date) {
+        LocalDateTime from = LocalDateTime.of(date, LocalTime.MIN);
+        LocalDateTime to = LocalDateTime.of(date, LocalTime.MAX);
+        List<StudentEntity> entityList = studentRepository.findByCreatedDateBetween(from, to);
         return getStudentDTOS(entityList);
     }
 
-    public List<StudentDTO> getByBetweenDate(String dateI, String dateF) {
-        List<StudentEntity> entityList = studentRepository.findByCreatedDateBetween(parse(dateI), parse(dateF));
+    public List<StudentDTO> getByBetweenDate(LocalDate dateI, LocalDate dateF) {
+        LocalDateTime from = LocalDateTime.of(dateI, LocalTime.MIN);
+        LocalDateTime to = LocalDateTime.of(dateF, LocalTime.MAX);
+        List<StudentEntity> entityList = studentRepository.findByCreatedDateBetween(from,to);
         return getStudentDTOS(entityList);
     }
 
@@ -110,12 +115,6 @@ public class StudentService {
 
 
 //  help
-
-    public LocalDate parse(String dateStr){
-        String pattern = "yyyy-MM-dd";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
-        return LocalDate.parse(dateStr,formatter);
-    }
 
     public StudentDTO toDTO(StudentEntity entity){
         StudentDTO dto = new StudentDTO();

@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.dto.StudentDTO;
 import com.example.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -87,14 +88,14 @@ public class StudentController {
 
     @GetMapping("/date")
     public ResponseEntity<?> getByDate(@RequestParam("date")
-                                               String  date){
-
+                                       @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                               LocalDate  date){
         return ResponseEntity.ok(studentService.getByDate(date));
     }
 
     @GetMapping("/dates")
-    public ResponseEntity<?> getByBetweenDate(@RequestParam String dateI,
-                                              @RequestParam String dateF){
+    public ResponseEntity<?> getByBetweenDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateI,
+                                              @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateF){
         return ResponseEntity.ok(studentService.getByBetweenDate(dateI,dateF));
     }
 

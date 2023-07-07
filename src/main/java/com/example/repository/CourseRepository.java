@@ -16,6 +16,6 @@ public interface CourseRepository extends CrudRepository<CourseEntity, Integer> 
 
     List<CourseEntity> findByPriceBetween(Double priceI, Double priceF);
 
-    List<CourseEntity> findByCreatedDateBetween(LocalDate dateI, LocalDate dateF);
+    List<CourseEntity> findByCreatedDateBetween(LocalDateTime dateI, LocalDateTime dateF);
 
 }

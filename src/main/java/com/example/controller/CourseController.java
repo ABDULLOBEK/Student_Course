@@ -4,10 +4,12 @@ import com.example.dto.CourseDTO;
 import com.example.dto.StudentDTO;
 import com.example.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -27,62 +29,62 @@ public class CourseController {
     private CourseService courseService;
 
     @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody CourseDTO course){
+    public ResponseEntity<?> create(@RequestBody CourseDTO course) {
         CourseDTO response = courseService.add(course);
         return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@PathVariable("id") Integer id){
+    public ResponseEntity<?> getById(@PathVariable("id") Integer id) {
         return ResponseEntity.ok(courseService.getById(id));
     }
 
     @GetMapping("/all")
-    public List<CourseDTO> all(){
+    public List<CourseDTO> all() {
         return courseService.getAll();
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> put(@RequestBody CourseDTO course,
-                                 @PathVariable("id") Integer id){
+                                 @PathVariable("id") Integer id) {
         courseService.update(id, course);
         return ResponseEntity.ok(true);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Integer id){
+    public ResponseEntity<?> delete(@PathVariable Integer id) {
         Boolean response = courseService.delete(id);
-        if(response){
+        if (response) {
             return ResponseEntity.ok("Course Deleted");
         }
         return ResponseEntity.badRequest().body("Course not found");
     }
 
     @GetMapping("/name")
-    public ResponseEntity<?> getByName(@RequestParam("name") String name){
+    public ResponseEntity<?> getByName(@RequestParam("name") String name) {
         return ResponseEntity.ok(courseService.getByName(name));
     }
 
     @GetMapping("/price")
-    public ResponseEntity<?> getByPrice(@RequestParam("price") Double price){
+    public ResponseEntity<?> getByPrice(@RequestParam("price") Double price) {
         return ResponseEntity.ok(courseService.getByPrice(price));
     }
 
     @GetMapping("/duration")
-    public ResponseEntity<?> getByDuration(@RequestParam("duration") String duration){
+    public ResponseEntity<?> getByDuration(@RequestParam("duration") String duration) {
         return ResponseEntity.ok(courseService.getByDuration(duration));
     }
 
     @GetMapping("/prices")
-    public ResponseEntity<?> getByBetweenPrice(@RequestParam("priceI")Double priceI,
-                                               @RequestParam("priceF") Double priceF){
+    public ResponseEntity<?> getByBetweenPrice(@RequestParam("priceI") Double priceI,
+                                               @RequestParam("priceF") Double priceF) {
         return ResponseEntity.ok(courseService.getByBetweenPrice(priceI, priceF));
     }
 
     @GetMapping("/dates")
-    public ResponseEntity<?> getByBetweenDate(@RequestParam String dateI,
-                                              @RequestParam String dateF){
-        return ResponseEntity.ok(courseService.getByBetweenDate(dateI,dateF));
+    public ResponseEntity<?> getByBetweenDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateI,
+                                              @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateF) {
+        return ResponseEntity.ok(courseService.getByBetweenDate(dateI, dateF));
     }
 }
