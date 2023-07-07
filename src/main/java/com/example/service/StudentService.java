@@ -6,6 +6,10 @@ import com.example.entity.StudentEntity;
 import com.example.exp.ItemNotFoundException;
 import com.example.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.xml.crypto.Data;
@@ -109,6 +113,33 @@ public class StudentService {
         LocalDateTime to = LocalDateTime.of(dateF, LocalTime.MAX);
         List<StudentEntity> entityList = studentRepository.findByCreatedDateBetween(from,to);
         return getStudentDTOS(entityList);
+    }
+
+    public List<StudentDTO> studentPagination(int page, int size) {
+        Pageable paging = PageRequest.of(page,size);
+        Page<StudentEntity> pageObj = studentRepository.findAll(paging);
+        List<StudentEntity> entityList = pageObj.getContent();
+        Long totalCount = pageObj.getTotalElements();
+        System.out.println();
+        return  getStudentDTOS(entityList);
+    }
+
+    public List<StudentDTO> studentPaginationByLevel(int page, int size, String level){
+        Pageable paging = PageRequest.of(page,size, Sort.by("id"));
+        Page<StudentEntity> pageObj = studentRepository.findAllByLevel(level,paging);
+        List<StudentEntity> entityList = pageObj.getContent();
+        Long totalCount = pageObj.getTotalElements();
+        System.out.println();
+        return  getStudentDTOS(entityList);
+    }
+
+    public List<StudentDTO> studentPaginationByGender(int page, int size, String gender){
+        Pageable paging = PageRequest.of(page,size);
+        Page<StudentEntity> pageObj = studentRepository.findAllByGenderOOrderByCreatedDate(gender,paging);
+        List<StudentEntity> entityList = pageObj.getContent();
+        Long totalCount = pageObj.getTotalElements();
+        System.out.println();
+        return  getStudentDTOS(entityList);
     }
 
 

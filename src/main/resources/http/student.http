@@ -36,5 +36,8 @@ GET localhost:8080/student/name?name=Ali
 ### Get by date
 GET localhost:8080/student/date?date=2023-07-05
 
-### GEt by dates
+### Get by dates
 GET localhost:8080/student/dates?dateI=2023-07-03&dateF=2023-07-04
+
+### Get by pages
+GET localhost:8080/student/pagination?page=6&size=1
