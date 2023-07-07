@@ -7,12 +7,15 @@ import com.example.entity.StudentEntity;
 import com.example.exp.ItemNotFoundException;
 import com.example.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -98,6 +101,40 @@ public class CourseService  {
         return getCourseDTOS(entityList);
     }
 
+    public List<CourseDTO> coursePagination(int page, int size) {
+        Pageable paging = PageRequest.of(page,size);
+        Page<CourseEntity> pageObj = courseRepository.findAll(paging);
+        List<CourseEntity> entityList = pageObj.getContent();
+        Long totalCount = pageObj.getTotalElements();
+        return  getCourseDTOS(entityList);
+    }
+
+    public List<CourseDTO> coursePaginationByDate(int page, int size) {
+        Pageable paging = PageRequest.of(page,size);
+        Page<CourseEntity> pageObj = courseRepository.findAll(paging);
+        List<CourseEntity> entityList = pageObj.getContent();
+        Long totalCount = pageObj.getTotalElements();
+        return  getCourseDTOS(entityList);
+    }
+
+    public List<CourseDTO> coursePaginationByPrice(int page, int size, Double price){
+        Pageable paging = PageRequest.of(page,size, Sort.by("createdDate"));
+        Page<CourseEntity> pageObj = courseRepository.findAllByPriceOrderByCreatedDate(price,paging);
+        List<CourseEntity> entityList = pageObj.getContent();
+        Long totalCount = pageObj.getTotalElements();
+        System.out.println();
+        return  getCourseDTOS(entityList);
+    }
+
+    public List<CourseDTO> coursePaginationByPrices(int page, int size, Double priceI,Double priceF){
+        Pageable paging = PageRequest.of(page,size);
+        Page<CourseEntity> pageObj = courseRepository.findAllByPriceBetweenOrderByCreatedDate(priceI,priceF,paging);
+        List<CourseEntity> entityList = pageObj.getContent();
+        Long totalCount = pageObj.getTotalElements();
+        System.out.println();
+        return  getCourseDTOS(entityList);
+    }
+
 
 
 
@@ -118,7 +155,7 @@ public class CourseService  {
         entity.setName(dto.getName());
         entity.setDuration(dto.getDuration());
         entity.setPrice(dto.getPrice());
-        entity.setCreatedDate(LocalDate.now());
+        entity.setCreatedDate(LocalDateTime.now());
         return entity;
     }
 

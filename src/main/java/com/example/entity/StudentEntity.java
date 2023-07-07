@@ -34,5 +34,5 @@ public class StudentEntity {
     private String gender;
 
     @Column(name = "created_date")
-    private LocalDate createdDate;
+    private LocalDateTime createdDate;
 }

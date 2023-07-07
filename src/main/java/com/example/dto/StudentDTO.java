@@ -15,5 +15,5 @@ public class StudentDTO {
     private String level;
     private Integer age;
     private String gender;
-    private LocalDate createdDate;
+    private LocalDateTime createdDate;
 }

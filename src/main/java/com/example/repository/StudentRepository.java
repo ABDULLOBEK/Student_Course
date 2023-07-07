@@ -19,7 +19,7 @@ public interface StudentRepository extends CrudRepository<StudentEntity, Integer
 
     Page<StudentEntity> findAllByLevel(String level, Pageable pageable);
 
-    Page<StudentEntity> findAllByGenderOOrderByCreatedDate(String gender, Pageable pageable);
+    Page<StudentEntity> findAllByGenderOrderByCreatedDate(String gender, Pageable pageable);
 
     List<StudentEntity> getByName(String name);
 

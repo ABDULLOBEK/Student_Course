@@ -26,5 +26,5 @@ public class CourseEntity {
     private String duration;
 
     @Column(name = "crated_date")
-    private LocalDate createdDate;
+    private LocalDateTime createdDate;
 }

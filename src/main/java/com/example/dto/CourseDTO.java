@@ -13,5 +13,5 @@ public class CourseDTO {
    private String  name;
    private Double price;
    private String duration;
-   private LocalDate createdDate;
+   private LocalDateTime createdDate;
 }

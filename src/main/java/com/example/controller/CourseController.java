@@ -87,4 +87,33 @@ public class CourseController {
                                               @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateF) {
         return ResponseEntity.ok(courseService.getByBetweenDate(dateI, dateF));
     }
+
+    @GetMapping(value = "/pagination")
+    public ResponseEntity<?> pagination(@RequestParam(value = "page", defaultValue = "1") int page,
+                                        @RequestParam(value = "size", defaultValue = "10") int size) {
+
+        return ResponseEntity.ok(courseService.coursePagination(page - 1, size));
+    }
+
+    @GetMapping(value = "/paginationByDate")
+    public ResponseEntity<?> paginationByDate(@RequestParam(value = "page", defaultValue = "1") int page,
+                                        @RequestParam(value = "size", defaultValue = "10") int size) {
+
+        return ResponseEntity.ok(courseService.coursePaginationByDate(page - 1, size));
+    }
+
+    @GetMapping(value = "/paginationAndPrice")
+    public ResponseEntity<?> paginationByPrice(@RequestParam(value = "page", defaultValue = "1") int page,
+                                               @RequestParam(value = "size", defaultValue = "10") int size, Double price) {
+        return ResponseEntity.ok(courseService.coursePaginationByPrice(page - 1, size, price));
+    }
+
+    @GetMapping(value = "/paginationAndPrices")
+    public ResponseEntity<?> paginationByPrices(@RequestParam(value = "page", defaultValue = "1") int page,
+                                               @RequestParam(value = "size", defaultValue = "10") int size, Double priceI, Double priceF) {
+        return ResponseEntity.ok(courseService.coursePaginationByPrices(page - 1, size, priceI, priceF));
+
+    }
+
+
 }

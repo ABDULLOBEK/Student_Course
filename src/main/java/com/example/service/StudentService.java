@@ -135,7 +135,7 @@ public class StudentService {
 
     public List<StudentDTO> studentPaginationByGender(int page, int size, String gender){
         Pageable paging = PageRequest.of(page,size);
-        Page<StudentEntity> pageObj = studentRepository.findAllByGenderOOrderByCreatedDate(gender,paging);
+        Page<StudentEntity> pageObj = studentRepository.findAllByGenderOrderByCreatedDate(gender,paging);
         List<StudentEntity> entityList = pageObj.getContent();
         Long totalCount = pageObj.getTotalElements();
         System.out.println();
@@ -166,7 +166,7 @@ public class StudentService {
         entity.setGender(dto.getGender());
         entity.setLevel(dto.getLevel());
         entity.setAge(dto.getAge());
-        entity.setCreatedDate(LocalDate.now());
+        entity.setCreatedDate(LocalDateTime.now());
         return entity;
     }
 
