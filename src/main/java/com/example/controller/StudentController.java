@@ -53,9 +53,9 @@ public class StudentController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Integer id){
-        Boolean response = studentService.delete(id);
-        if(response){
+    public ResponseEntity<?> delete(@PathVariable("id") Integer id){
+        int response = studentService.delete(id);
+        if(response>0){
             return ResponseEntity.ok("Student Deleted");
         }
         return ResponseEntity.badRequest().body("Student not found");

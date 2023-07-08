@@ -23,15 +23,20 @@ PUT localhost:8080/student/8
 Content-Type: application/json
 
 {
-  "name": "Abdullo",
+  "name": "Abdu",
   "surname": "Navruzov"
 }
 
 ### Delete by id
-DELETE localhost:8080/student/7
+DELETE localhost:8080/student/2
 
 ### Get by name
-GET localhost:8080/student/name?name=Ali
+GET localhost:8080/student/name?name=slim
+
+
+### Get by surname
+GET localhost:8080/student/surname?surname=Navruzov
+
 
 ### Get by date
 GET localhost:8080/student/date?date=2023-07-05
@@ -40,4 +45,4 @@ GET localhost:8080/student/date?date=2023-07-05
 GET localhost:8080/student/dates?dateI=2023-07-03&dateF=2023-07-04
 
 ### Get by pages
-GET localhost:8080/student/pagination?page=6&size=1
+GET localhost:8080/student/pagination?page=1&size=10

@@ -1,9 +1,7 @@
 package com.example.service;
 
 import com.example.dto.CourseDTO;
-import com.example.dto.StudentDTO;
 import com.example.entity.CourseEntity;
-import com.example.entity.StudentEntity;
 import com.example.exp.ItemNotFoundException;
 import com.example.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;

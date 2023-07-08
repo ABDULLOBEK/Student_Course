@@ -6,10 +6,7 @@ import com.example.entity.StudentEntity;
 import com.example.exp.ItemNotFoundException;
 import com.example.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import javax.xml.crypto.Data;
@@ -21,6 +18,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
@@ -54,25 +52,13 @@ public class StudentService {
     }
 
     public Boolean update(Integer id, StudentDTO student) {
-        Optional<StudentEntity> optional = studentRepository.findById(id);
-
-        if (optional.isPresent()) {
-            StudentEntity entity = optional.get();
-            entity.setName(student.getName());
-            entity.setSurname(student.getSurname());
-
-            studentRepository.save(entity);
-            return true;
-        }
-        return false;
+        int affectedRows = studentRepository.updateNameAndSurname(id,student.getName(),student.getSurname());
+        return affectedRows == 1;
     }
 
-    public Boolean delete(Integer id) {
-        Optional<StudentEntity> optional = studentRepository.findById(id);
-        if(optional.isPresent()){
-        studentRepository.delete(optional.get());
-        return true;}
-        return false;
+    public Integer delete(Integer id) {
+        int affectedRows = studentRepository.delete(id);
+       return affectedRows;
 
     }
 
@@ -115,31 +101,28 @@ public class StudentService {
         return getStudentDTOS(entityList);
     }
 
-    public List<StudentDTO> studentPagination(int page, int size) {
-        Pageable paging = PageRequest.of(page,size);
-        Page<StudentEntity> pageObj = studentRepository.findAll(paging);
-        List<StudentEntity> entityList = pageObj.getContent();
-        Long totalCount = pageObj.getTotalElements();
-        System.out.println();
-        return  getStudentDTOS(entityList);
+    public PageImpl<StudentDTO> studentPagination(int page, int size) {
+        Pageable pageable = PageRequest.of(page,size, Sort.Direction.DESC, "id");
+        Page<StudentEntity> pageObj = studentRepository.findAll(pageable);
+        List<StudentDTO> studentDTOList = pageObj.stream().map(this::toDTO).collect(Collectors.toList());
+        return new PageImpl<>(studentDTOList, pageable, pageObj.getTotalElements());
+
     }
 
-    public List<StudentDTO> studentPaginationByLevel(int page, int size, String level){
-        Pageable paging = PageRequest.of(page,size, Sort.by("id"));
+    public PageImpl<StudentDTO> studentPaginationByLevel(int page, int size, String level){
+        Pageable paging = PageRequest.of(page,size, Sort.by(Sort.Direction.DESC,"id"));
         Page<StudentEntity> pageObj = studentRepository.findAllByLevel(level,paging);
-        List<StudentEntity> entityList = pageObj.getContent();
-        Long totalCount = pageObj.getTotalElements();
-        System.out.println();
-        return  getStudentDTOS(entityList);
+        List<StudentDTO> studentDTOList = pageObj.stream().map(this::toDTO).collect(Collectors.toList());
+        return new PageImpl<>(studentDTOList, paging, pageObj.getTotalElements());
+
     }
 
-    public List<StudentDTO> studentPaginationByGender(int page, int size, String gender){
-        Pageable paging = PageRequest.of(page,size);
+    public PageImpl<StudentDTO> studentPaginationByGender(int page, int size, String gender){
+        Pageable paging = PageRequest.of(page,size,Sort.by(Sort.Direction.DESC, "id"));
         Page<StudentEntity> pageObj = studentRepository.findAllByGenderOrderByCreatedDate(gender,paging);
-        List<StudentEntity> entityList = pageObj.getContent();
-        Long totalCount = pageObj.getTotalElements();
-        System.out.println();
-        return  getStudentDTOS(entityList);
+        List<StudentDTO> studentDTOList = pageObj.stream().map(this::toDTO).collect(Collectors.toList());
+        return new PageImpl<>(studentDTOList, paging, pageObj.getTotalElements());
+
     }
 
 
