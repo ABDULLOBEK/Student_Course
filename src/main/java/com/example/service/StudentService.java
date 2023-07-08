@@ -57,8 +57,7 @@ public class StudentService {
     }
 
     public Integer delete(Integer id) {
-        int affectedRows = studentRepository.delete(id);
-       return affectedRows;
+        return studentRepository.delete(id);
 
     }
 

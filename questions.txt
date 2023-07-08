@@ -6,7 +6,11 @@ Course (1,2,3,4,5,6,7,8)
 
 Student
   id,name,surname,level,age,Gender,createdDate
-  1. Create student
+  1. Create studentPageable pageable = PageRequest.of(page,size, Sort.Direction.DESC, "id");
+                           Page<CourseEntity> pageObj = courseRepository.findAll(pageable);
+                           List<CourseDTO> studentDTOList = pageObj.stream().map(this::toDTO).collect(Collectors.toList());
+                           return new PageImpl<>(studentDTOList, pageable, pageObj.getTotalElements());
+
   2. Get Student List. return all.
   3. Get student by id.
   4. Update student.

@@ -1,14 +1,13 @@
 package com.example.service;
 
 import com.example.dto.CourseDTO;
+import com.example.dto.StudentDTO;
 import com.example.entity.CourseEntity;
+import com.example.entity.StudentEntity;
 import com.example.exp.ItemNotFoundException;
 import com.example.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -17,6 +16,7 @@ import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CourseService  {
@@ -49,7 +49,9 @@ public class CourseService  {
     }
 
     public Boolean update(Integer id, CourseDTO dto) {
-        Optional<CourseEntity> optional = courseRepository.findById(id);
+        int affectedRows = courseRepository.update(id, dto.getName(), dto.getDuration(), dto.getPrice());
+        return affectedRows == 1;
+        /*Optional<CourseEntity> optional = courseRepository.findById(id);
 
         if (optional.isPresent()) {
             CourseEntity entity = optional.get();
@@ -61,7 +63,7 @@ public class CourseService  {
             return true;
         }
         return false;
-    }
+*/}
 
     public Boolean delete(Integer id) {
         Optional<CourseEntity> optional = courseRepository.findById(id);
@@ -99,39 +101,36 @@ public class CourseService  {
         return getCourseDTOS(entityList);
     }
 
-    public List<CourseDTO> coursePagination(int page, int size) {
-        Pageable paging = PageRequest.of(page,size);
-        Page<CourseEntity> pageObj = courseRepository.findAll(paging);
-        List<CourseEntity> entityList = pageObj.getContent();
-        Long totalCount = pageObj.getTotalElements();
-        return  getCourseDTOS(entityList);
+    public PageImpl<CourseDTO> coursePagination(int page, int size) {
+        Pageable pageable = PageRequest.of(page,size, Sort.Direction.DESC, "id");
+        Page<CourseEntity> pageObj = courseRepository.findAll(pageable);
+        List<CourseDTO> studentDTOList = pageObj.stream().map(this::toDTO).collect(Collectors.toList());
+        return new PageImpl<>(studentDTOList, pageable, pageObj.getTotalElements());
+
     }
 
-    public List<CourseDTO> coursePaginationByDate(int page, int size) {
-        Pageable paging = PageRequest.of(page,size);
-        Page<CourseEntity> pageObj = courseRepository.findAll(paging);
-        List<CourseEntity> entityList = pageObj.getContent();
-        Long totalCount = pageObj.getTotalElements();
-        return  getCourseDTOS(entityList);
+    public PageImpl<CourseDTO> coursePaginationByDate(int page, int size) {
+        Pageable pageable = PageRequest.of(page,size, Sort.Direction.DESC, "createdDate");
+        Page<CourseEntity> pageObj = courseRepository.findAll(pageable);
+        List<CourseDTO> studentDTOList = pageObj.stream().map(this::toDTO).collect(Collectors.toList());
+        return new PageImpl<>(studentDTOList, pageable, pageObj.getTotalElements());
+
     }
 
-    public List<CourseDTO> coursePaginationByPrice(int page, int size, Double price){
-        Pageable paging = PageRequest.of(page,size, Sort.by("createdDate"));
-        Page<CourseEntity> pageObj = courseRepository.findAllByPriceOrderByCreatedDate(price,paging);
-        List<CourseEntity> entityList = pageObj.getContent();
-        Long totalCount = pageObj.getTotalElements();
-        System.out.println();
-        return  getCourseDTOS(entityList);
+    public PageImpl<CourseDTO> coursePaginationByPrice(int page, int size, Double price){
+        Pageable pageable = PageRequest.of(page,size);
+        Page<CourseEntity> pageObj = courseRepository.findAllByPriceOrderByCreatedDate(price,pageable);
+        List<CourseDTO> studentDTOList = pageObj.stream().map(this::toDTO).collect(Collectors.toList());
+        return new PageImpl<>(studentDTOList, pageable, pageObj.getTotalElements());
     }
 
-    public List<CourseDTO> coursePaginationByPrices(int page, int size, Double priceI,Double priceF){
-        Pageable paging = PageRequest.of(page,size);
-        Page<CourseEntity> pageObj = courseRepository.findAllByPriceBetweenOrderByCreatedDate(priceI,priceF,paging);
-        List<CourseEntity> entityList = pageObj.getContent();
-        Long totalCount = pageObj.getTotalElements();
-        System.out.println();
-        return  getCourseDTOS(entityList);
+    public PageImpl<CourseDTO> coursePaginationByPrices(int page, int size, Double priceI,Double priceF){
+        Pageable pageable = PageRequest.of(page,size);
+        Page<CourseEntity> pageObj = courseRepository.findAllByPriceBetweenOrderByCreatedDate(priceI,priceF,pageable);
+        List<CourseDTO> studentDTOList = pageObj.stream().map(this::toDTO).collect(Collectors.toList());
+        return new PageImpl<>(studentDTOList, pageable, pageObj.getTotalElements());
     }
+
 
 
 

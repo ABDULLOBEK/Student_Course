@@ -3,9 +3,9 @@ POST localhost:8080/course/create
 Content-Type: application/json
 
 {
-  "name": "Vali",
-  "price": 90.8,
-  "duration": "1 month"
+  "name": "Valibek",
+  "price": 90.45,
+  "duration": "2 month"
 }
 
 
@@ -13,11 +13,11 @@ Content-Type: application/json
 GET localhost:8080/course/all
 
 ### Get by id
-GET localhost:8080/course/1
+GET localhost:8080/course/4
 
 
 ### Update by id
-PUT localhost:8080/course/1
+PUT localhost:8080/course/4
 Content-Type: application/json
 
 {
@@ -26,7 +26,7 @@ Content-Type: application/json
 }
 
 ### Delete by id
-DELETE localhost:8080/course/7
+DELETE localhost:8080/course/4
 
 ### Get by name
 GET localhost:8080/course/name?name=Ali
@@ -36,3 +36,6 @@ GET localhost:8080/course/prices?priceI=10.0&priceF=12.25
 
 ### GEt by dates
 GET localhost:8080/course/dates?dateI=2023-07-03&dateF=2023-07-04
+
+### Get by pages
+GET localhost:8080/course/pagination?page=1&size=2
