@@ -1,0 +1,74 @@
+### Create scm
+POST localhost:8080/mark/create
+Content-Type: application/json
+
+{
+  "studentId": 20,
+  "courseId": 2,
+  "mark": 5
+}
+
+### Update by id
+PUT localhost:8080/mark/1
+Content-Type: application/json
+
+{
+  "mark": 3
+}
+
+### Get by id
+GET localhost:8080/mark/1
+
+### Get by id
+GET localhost:8080/mark/dto/1
+
+### Delete by id
+DELETE localhost:8080/mark/2
+
+### Get all
+GET localhost:8080/mark/all
+
+### Get by date
+GET localhost:8080/mark/date?date=2023-07-10
+
+### Get by two day
+GET localhost:8080/mark/twoDay?dateI=2023-07-10&dateF=2023-07-12
+
+### Get all mark
+GET localhost:8080/mark/allMark
+
+### get mark by course id
+GET localhost:8080/mark/markCourse?course_id=2
+
+### Get last mark
+GET localhost:8080/mark/lastMark
+
+### Get big 3 mark
+GET localhost:8080/mark/bigThree
+
+### Get first mark
+GET localhost:8080/mark/firstMark
+
+### Get first mark by course
+GET localhost:8080/mark/firstMarkCourse?course_id=2
+
+### Get highest mark
+GET localhost:8080/mark/highestMark
+
+### Get avg mark
+GET localhost:8080/mark/avgMark
+
+### Get by pages
+GET localhost:8080/mark/pagination?page=1&size=3
+
+### Get by paginationByStudentID
+GET localhost:8080/mark/paginationByStudentID?page=1&size=3&student_id=1
+
+### Get by paginationByCourseID
+GET localhost:8080/mark/paginationByCourseID?page=1&size=3&student_id=1&course_id=2
+
+
+
+
+
+

@@ -39,7 +39,7 @@ public class StudentCourseMarkController {
         return ResponseEntity.ok(studentCourseMarkService.getById(id));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/dto/{id}")
     public ResponseEntity<DTOMapper> getByIdDTO(@PathVariable("id") Integer id) {
         return ResponseEntity.ok(studentCourseMarkService.getByIdDTO(id));
     }
@@ -95,7 +95,7 @@ public class StudentCourseMarkController {
         return ResponseEntity.ok(studentCourseMarkService.firstMark());
     }
 
-    @GetMapping("/firstMarkCOurse")
+    @GetMapping("/firstMarkCourse")
     public ResponseEntity<Integer> firstMarkByCourse(@RequestParam("course_id") Integer course_id) {
         return ResponseEntity.ok(studentCourseMarkService.firstMarkByCourse(course_id));
     }
@@ -142,15 +142,17 @@ public class StudentCourseMarkController {
         return ResponseEntity.ok(studentCourseMarkService.studentCourseMarkPagination(page - 1, size));
     }
 
-    @GetMapping(value = "/paginationAndLevel")
+    @GetMapping(value = "/paginationByStudentID")
     public ResponseEntity<?> findAllByStudentOrderByCreatedDate(@RequestParam(value = "page", defaultValue = "1") int page,
-                                               @RequestParam(value = "size", defaultValue = "10") int size, int student_id) {
+                                               @RequestParam(value = "size", defaultValue = "10") int size,
+                                               @RequestParam("student_id") int student_id) {
         return ResponseEntity.ok(studentCourseMarkService.findAllByStudentOrderByCreatedDate(student_id,page - 1, size));
     }
 
-    @GetMapping(value = "/paginationAndGender")
+    @GetMapping(value = "/paginationByCourseID")
     public ResponseEntity<?> findAllByCourseOrderByCreatedDate(@RequestParam(value = "page", defaultValue = "1") int page,
-                                                @RequestParam(value = "size", defaultValue = "10") int size, int course_id) {
+                                                @RequestParam(value = "size", defaultValue = "10") int size,
+                                                @RequestParam("course_id") int course_id) {
         return ResponseEntity.ok(studentCourseMarkService.findAllByCourseOrderByCreatedDate(course_id,page - 1, size));
     }
 
