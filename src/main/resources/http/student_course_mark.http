@@ -9,18 +9,18 @@ Content-Type: application/json
 }
 
 ### Update by id
-PUT localhost:8080/mark/1
+PUT localhost:8080/mark/2
 Content-Type: application/json
 
 {
-  "mark": 3
+  "mark": 4
 }
 
 ### Get by id
-GET localhost:8080/mark/1
+GET localhost:8080/mark/2
 
 ### Get by id
-GET localhost:8080/mark/dto/1
+GET localhost:8080/mark/dto/2
 
 ### Delete by id
 DELETE localhost:8080/mark/2
@@ -53,7 +53,7 @@ GET localhost:8080/mark/firstMark
 GET localhost:8080/mark/firstMarkCourse?course_id=2
 
 ### Get highest mark
-GET localhost:8080/mark/highestMark
+GET localhost:8080/mark/highestMark?course_id=2
 
 ### Get avg mark
 GET localhost:8080/mark/avgMark

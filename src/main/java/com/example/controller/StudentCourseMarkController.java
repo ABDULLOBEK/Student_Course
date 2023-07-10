@@ -59,9 +59,8 @@ public class StudentCourseMarkController {
     }
 
     @GetMapping("/date")
-    public ResponseEntity<?> getMarkByDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateI,
-                                           @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateF) {
-        return ResponseEntity.ok(studentCourseMarkService.getMarkByDate(dateI, dateF));
+    public ResponseEntity<?> getMarkByDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        return ResponseEntity.ok(studentCourseMarkService.getMarkByDate(date));
     }
 
     @GetMapping("/twoDay")

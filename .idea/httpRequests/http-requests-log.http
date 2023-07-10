@@ -1,3 +1,289 @@
+GET http://localhost:8080/mark/paginationByStudentID?page=1&size=3&student_id=1
+
+<> 2023-07-10T155115.200.json
+
+###
+
+GET http://localhost:8080/mark/paginationByCourseID?page=1&size=3&student_id=1&course_id=2
+
+<> 2023-07-10T155108.200.json
+
+###
+
+GET http://localhost:8080/mark/paginationByStudentID?page=1&size=3&student_id=1
+
+<> 2023-07-10T155102.200.json
+
+###
+
+GET http://localhost:8080/mark/paginationByStudentID?page=1&size=3&student_id=1
+
+<> 2023-07-10T154518.500.json
+
+###
+
+GET http://localhost:8080/mark/pagination?page=1&size=3
+
+<> 2023-07-10T154513.200.json
+
+###
+
+GET http://localhost:8080/mark/avgMark
+
+<> 2023-07-10T154506.200.json
+
+###
+
+GET http://localhost:8080/mark/highestMark?course_id=2
+
+<> 2023-07-10T154456.200.json
+
+###
+
+GET http://localhost:8080/mark/highestMark
+
+<> 2023-07-10T154425.400.json
+
+###
+
+GET http://localhost:8080/mark/highestMark
+
+<> 2023-07-10T154410.400.json
+
+###
+
+GET http://localhost:8080/mark/firstMarkCourse?course_id=2
+
+<> 2023-07-10T154406.200.json
+
+###
+
+GET http://localhost:8080/mark/markCourse?course_id=2
+
+<> 2023-07-10T154357.200.json
+
+###
+
+GET http://localhost:8080/mark/markCourse?course_id=1
+
+<> 2023-07-10T154202.200.json
+
+###
+
+GET http://localhost:8080/mark/bigThree
+
+<> 2023-07-10T154127.200.json
+
+###
+
+GET http://localhost:8080/mark/lastMark
+
+<> 2023-07-10T154116.200.json
+
+###
+
+GET http://localhost:8080/mark/markCourse?course_id=1
+
+<> 2023-07-10T154020.200.json
+
+###
+
+GET http://localhost:8080/mark/markCourse?course_id=3
+
+<> 2023-07-10T154001.200.json
+
+###
+
+GET http://localhost:8080/mark/markCourse?course_id=3
+
+<> 2023-07-10T153555.500.json
+
+###
+
+GET http://localhost:8080/mark/markCourse?course_id=2
+
+<> 2023-07-10T153539.500.json
+
+###
+
+GET http://localhost:8080/mark/allMark
+
+<> 2023-07-10T153445.200.json
+
+###
+
+GET http://localhost:8080/mark/twoDay?dateI=2023-07-10&dateF=2023-07-12
+
+<> 2023-07-10T153440.200.json
+
+###
+
+GET http://localhost:8080/mark/date?date=2023-07-10
+
+<> 2023-07-10T153428.200.json
+
+###
+
+GET http://localhost:8080/mark/allMark
+
+<> 2023-07-10T153416.200.json
+
+###
+
+GET http://localhost:8080/mark/twoDay?dateI=2023-07-10&dateF=2023-07-12
+
+<> 2023-07-10T153413.200.json
+
+###
+
+GET http://localhost:8080/mark/date?date=2023-07-10
+
+<> 2023-07-10T153353.200.json
+
+###
+
+GET http://localhost:8080/mark/date?date=2023-07-10
+
+<> 2023-07-10T153138.400.json
+
+###
+
+POST http://localhost:8080/mark/create
+Content-Type: application/json
+
+{
+  "studentId": 20,
+  "courseId": 2,
+  "mark": 5
+}
+
+<> 2023-07-10T153131.200.json
+
+###
+
+GET http://localhost:8080/mark/all
+
+<> 2023-07-10T153116.200.json
+
+###
+
+DELETE http://localhost:8080/mark/2
+
+<> 2023-07-10T153104.200.txt
+
+###
+
+GET http://localhost:8080/mark/dto/2
+
+<> 2023-07-10T153045.200.json
+
+###
+
+GET http://localhost:8080/mark/2
+
+<> 2023-07-10T153029.200.json
+
+###
+
+PUT http://localhost:8080/mark/2
+Content-Type: application/json
+
+{
+  "mark": 4
+}
+
+<> 2023-07-10T153017.200.json
+
+###
+
+POST http://localhost:8080/mark/create
+Content-Type: application/json
+
+{
+  "studentId": 20,
+  "courseId": 2,
+  "mark": 5
+}
+
+<> 2023-07-10T152947.200.json
+
+###
+
+GET http://localhost:8080/mark/dto/1
+
+<> 2023-07-10T152901.200.json
+
+###
+
+GET http://localhost:8080/mark/1
+
+<> 2023-07-10T152856.200.json
+
+###
+
+PUT http://localhost:8080/mark/1
+Content-Type: application/json
+
+{
+  "mark": 3
+}
+
+<> 2023-07-10T152847.200.json
+
+###
+
+POST http://localhost:8080/mark/create
+Content-Type: application/json
+
+{
+  "studentId": 1,
+  "courseId": 2,
+  "mark": 5
+}
+
+<> 2023-07-10T152830.200.json
+
+###
+
+POST http://localhost:8080/mark/create
+Content-Type: application/json
+
+{
+  "studentId": 1,
+  "courseId": 2,
+  "mark": 5
+}
+
+<> 2023-07-10T151747.400.json
+
+###
+
+POST http://localhost:8080/mark/create
+Content-Type: application/json
+
+{
+  "studentId": 1,
+  "courseId": 2,
+  "mark": 5
+}
+
+<> 2023-07-10T151735.400.json
+
+###
+
+POST http://localhost:8080/mark/create
+Content-Type: application/json
+
+{
+  "studentId": 20,
+  "courseId": 2,
+  "mark": 5
+}
+
+<> 2023-07-10T151708.400.json
+
+###
+
 POST http://localhost:8080/mark/create
 Content-Type: application/json
 
@@ -74,265 +360,6 @@ GET http://localhost:8080/course/4
 GET http://localhost:8080/course/1
 
 <> 2023-07-09T005420.200.json
-
-###
-
-GET http://localhost:8080/course/all
-
-<> 2023-07-09T005414.200.json
-
-###
-
-POST http://localhost:8080/course/create
-Content-Type: application/json
-
-{
-  "name": "Valibek",
-  "price": 90.45,
-  "duration": "2 month"
-}
-
-<> 2023-07-09T005408.200.json
-
-###
-
-POST http://localhost:8080/student/create
-Content-Type: application/json
-
-{
-  "name": "bakit",
-  "surname": "liyev",
-  "level": "Junior",
-  "age": 18,
-  "gender": "male"
-}
-
-<> 2023-07-09T004649.200.json
-
-###
-
-GET http://localhost:8080/student/pagination?page=1&size=10
-
-<> 2023-07-09T002344.200.json
-
-###
-
-GET http://localhost:8080/student/pagination?page=1&size=10
-
-<> 2023-07-09T002147.200.json
-
-###
-
-GET http://localhost:8080/student/pagination?page=1&size=3
-
-<> 2023-07-09T002134.200.json
-
-###
-
-GET http://localhost:8080/student/dates?dateI=2023-07-03&dateF=2023-07-04
-
-<> 2023-07-09T002129.200.json
-
-###
-
-GET http://localhost:8080/student/date?date=2023-07-05
-
-<> 2023-07-09T001852.400.txt
-
-###
-
-GET http://localhost:8080/student/name?name=slim
-
-<> 2023-07-09T001839.200.json
-
-###
-
-GET http://localhost:8080/student/name?name=Abdullo
-
-<> 2023-07-09T001830.200.json
-
-###
-
-GET http://localhost:8080/student/surname?surname=Navruzov
-
-<> 2023-07-09T001819.200.json
-
-###
-
-GET http://localhost:8080/student/name?name=Abdullo
-
-<> 2023-07-09T001654.500.json
-
-###
-
-GET http://localhost:8080/student/name?name=Abdullo
-
-<> 2023-07-09T001500.500.json
-
-###
-
-GET http://localhost:8080/student/surname?surname=Navruzov
-
-<> 2023-07-09T001446.200.json
-
-###
-
-GET http://localhost:8080/student/all
-
-<> 2023-07-09T001429.200.json
-
-###
-
-GET http://localhost:8080/student/name?name=slim
-
-<> 2023-07-09T001251.500.json
-
-###
-
-GET http://localhost:8080/student/all
-
-<> 2023-07-09T001241.200.json
-
-###
-
-GET http://localhost:8080/student/name?name=Ali
-
-<> 2023-07-09T001140.500.json
-
-###
-
-DELETE http://localhost:8080/student/2
-
-<> 2023-07-09T001135.200.txt
-
-###
-
-DELETE http://localhost:8080/student/8
-
-<> 2023-07-09T001125.400.txt
-
-###
-
-PUT http://localhost:8080/student/8
-Content-Type: application/json
-
-{
-  "name": "Abdu",
-  "surname": "Navruzov"
-}
-
-<> 2023-07-09T001113.200.json
-
-###
-
-GET http://localhost:8080/student/3
-
-<> 2023-07-09T001100.200.json
-
-###
-
-GET http://localhost:8080/student/all
-
-<> 2023-07-09T001056.200.json
-
-###
-
-POST http://localhost:8080/student/create
-Content-Type: application/json
-
-{
-  "name": "slim",
-  "surname": "liyev",
-  "level": "Junior",
-  "age": 18,
-  "gender": "male"
-}
-
-<> 2023-07-09T001051.200.json
-
-###
-
-GET http://localhost:8080/student/pagination?page=1&size=3
-
-<> 2023-07-07T200757.200.json
-
-###
-
-GET http://localhost:8080/student/pagination?page=6&size=1
-
-<> 2023-07-07T105643.200.json
-
-###
-
-GET http://localhost:8080/student/pagination?page=6&size=0
-
-<> 2023-07-07T105636.500.json
-
-###
-
-GET http://localhost:8080/student/pagination?page=6&size=4
-
-<> 2023-07-07T105628.400.txt
-
-###
-
-GET http://localhost:8080/student/pagination?page=6&size=3
-
-<> 2023-07-07T105621.400.txt
-
-###
-
-GET http://localhost:8080/student/pagination?page=6&size=2
-
-<> 2023-07-07T105603.200.json
-
-###
-
-GET http://localhost:8080/student/pagination?page=6&size=1
-
-<> 2023-07-07T105555.200.json
-
-###
-
-GET http://localhost:8080/student/pagination?page=6&size=1
-
-###
-
-GET http://localhost:8080/student/pagination?page=6&size=1
-
-###
-
-GET http://localhost:8080/student/pagination?page=6&size=1
-
-###
-
-GET http://localhost:8080/course/dates?dateI=2023-07-03&dateF=2023-07-04
-
-<> 2023-07-05T161731.200.json
-
-###
-
-GET http://localhost:8080/student/date?date=2023-07-05
-
-<> 2023-07-05T161712.200.json
-
-###
-
-GET http://localhost:8080/student/date?date=2023-07-05
-
-<> 2023-07-05T161517.200.json
-
-###
-
-GET http://localhost:8080/student/date?date=2023-07-03
-
-<> 2023-07-05T161456.200.json
-
-###
-
-GET http://localhost:8080/student/dates?dateI=2023-07-03&dateF=2023-07-04
-
-<> 2023-07-05T161437.200.json
 
 ###
 

@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 public class StudentCourseMarkDTO {
 //    id,studentId,courseId,mark,createdDate
     private Integer id;
-    private StudentEntity studentId;
-    private CourseEntity courseId;
+    private Integer studentId;
+    private Integer courseId;
     private Integer mark;
     private LocalDateTime createdDate;
 }

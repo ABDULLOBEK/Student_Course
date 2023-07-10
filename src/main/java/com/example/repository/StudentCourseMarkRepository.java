@@ -1,6 +1,8 @@
 package com.example.repository;
 
+import com.example.entity.CourseEntity;
 import com.example.entity.StudentCourseMarkEntity;
+import com.example.entity.StudentEntity;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -45,7 +47,7 @@ public interface StudentCourseMarkRepository extends CrudRepository<StudentCours
     List<Integer> markListDesc();
 
     //10
-    @Query("select s.mark from StudentCourseMarkEntity as s where s.course=:course order by s.createdDate")
+    @Query("select s.mark from StudentCourseMarkEntity as s where s.course.id=:course order by s.createdDate")
     List<Integer> markListByCourse(@Param("course") Integer course_id);
 
     //11
@@ -61,11 +63,11 @@ public interface StudentCourseMarkRepository extends CrudRepository<StudentCours
     Integer firstMark();
 
     //14
-    @Query("select s.mark from StudentCourseMarkEntity as s where s.course=:course order by s.createdDate asc limit 1")
+    @Query("select s.mark from StudentCourseMarkEntity as s where s.course.id=:course order by s.createdDate asc limit 1")
     Integer firstMarkByCourse(@Param("course") Integer course_id);
 
     //15
-    @Query("select s.mark from StudentCourseMarkEntity as s where s.course=:course order by s.course desc limit 1")
+    @Query("select s.mark from StudentCourseMarkEntity as s where s.course.id=:course order by s.course desc limit 1")
     Integer highestMarkByCourse(@Param("course") Integer course_id);
 
     //16
@@ -73,30 +75,30 @@ public interface StudentCourseMarkRepository extends CrudRepository<StudentCours
     Double avgMark();
 
     //17
-    @Query("select avg (s.mark) from StudentCourseMarkEntity as s where s.course=:course")
+    @Query("select avg (s.mark) from StudentCourseMarkEntity as s where s.course.id=:course")
     Double avbByCourse(@Param("course") Integer course_id);
 
     //18
-    @Query("select count(s.mark) from StudentCourseMarkEntity as s where s.mark=(select max (sc.mark) from StudentCourseMarkEntity as sc where sc.course=:course)")
+    @Query("select count(s.mark) from StudentCourseMarkEntity as s where s.mark=(select max (sc.mark) from StudentCourseMarkEntity as sc where sc.course.id=:course)")
     Integer maxMarkCountByCourse(@Param("course") Integer course_id);
 
     //19
-    @Query("select s.mark from StudentCourseMarkEntity as s where s.course=:course order by s.course desc limit 1")
+    @Query("select s.mark from StudentCourseMarkEntity as s where s.course.id=:course order by s.course.id desc limit 1")
     Integer maxMarkByCourse(@Param("course") Integer course_id);
 
     //20
-    @Query("select avg (s.mark) from StudentCourseMarkEntity as s where s.course=:course")
+    @Query("select avg (s.mark) from StudentCourseMarkEntity as s where s.course.id=:course")
     Double avgMarkByCourse(@Param("course") Integer course_id);
 
     //21
-    @Query("select count (s.mark) from StudentCourseMarkEntity as s where s.course=:course")
+    @Query("select count (s.mark) from StudentCourseMarkEntity as s where s.course.id=:course")
     Integer countMarkByCourse(@Param("course") Integer course_id);
 
     //23
-    Page<StudentCourseMarkEntity> findAllByStudentOrderByCreatedDate(Integer student_id, Pageable pageable);
+    Page<StudentCourseMarkEntity> findAllByStudentOrderByCreatedDate(StudentEntity student_id, Pageable pageable);
 
     //24
-    Page<StudentCourseMarkEntity> findAllByCourseOrderByCreatedDate(Integer course_id, Pageable pageable);
+    Page<StudentCourseMarkEntity> findAllByCourseOrderByCreatedDate(CourseEntity course_id, Pageable pageable);
 
 
 

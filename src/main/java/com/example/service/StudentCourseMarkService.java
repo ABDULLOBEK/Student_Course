@@ -1,5 +1,7 @@
 package com.example.service;
 
+import com.example.entity.CourseEntity;
+import com.example.entity.StudentEntity;
 import com.example.mapper.DTOMapper;
 import com.example.mapper.SCMMapper;
 import com.example.dto.StudentCourseMarkDTO;
@@ -69,9 +71,9 @@ public class StudentCourseMarkService {
         return dtoList;
     }
 
-    public List<Integer> getMarkByDate(LocalDate dateI, LocalDate dateF) {
-        LocalDateTime from = LocalDateTime.of(dateI, LocalTime.MIN);
-        LocalDateTime to = LocalDateTime.of(dateF, LocalTime.MAX);
+    public List<Integer> getMarkByDate(LocalDate date) {
+        LocalDateTime from = LocalDateTime.of(date, LocalTime.MIN);
+        LocalDateTime to = LocalDateTime.of(date, LocalTime.MAX);
         return studentCourseMarkRepository.findByCreatedDateBetween(from,to);
     }
 
@@ -143,14 +145,18 @@ public class StudentCourseMarkService {
 
     public PageImpl<StudentCourseMarkDTO> findAllByStudentOrderByCreatedDate(int student_id,int page, int size) {
         Pageable pageable = PageRequest.of(page,size);
-        Page<StudentCourseMarkEntity> pageObj = studentCourseMarkRepository.findAllByStudentOrderByCreatedDate(student_id,pageable);
+        StudentEntity student = new StudentEntity();
+        student.setId(student_id);
+        Page<StudentCourseMarkEntity> pageObj = studentCourseMarkRepository.findAllByStudentOrderByCreatedDate(student,pageable);
         List<StudentCourseMarkDTO> studentCourseMarkDTOList = pageObj.stream().map(this::toDTO).toList();
         return new PageImpl<>(studentCourseMarkDTOList, pageable, pageObj.getTotalElements());
     }
 
     public PageImpl<StudentCourseMarkDTO> findAllByCourseOrderByCreatedDate(int course_id,int page, int size) {
         Pageable pageable = PageRequest.of(page,size);
-        Page<StudentCourseMarkEntity> pageObj = studentCourseMarkRepository.findAllByCourseOrderByCreatedDate(course_id,pageable);
+        CourseEntity course = new CourseEntity();
+        course.setId(course_id);
+        Page<StudentCourseMarkEntity> pageObj = studentCourseMarkRepository.findAllByCourseOrderByCreatedDate(course,pageable);
         List<StudentCourseMarkDTO> studentCourseMarkDTOList = pageObj.stream().map(this::toDTO).toList();
         return new PageImpl<>(studentCourseMarkDTOList, pageable, pageObj.getTotalElements());
     }
@@ -161,8 +167,8 @@ public class StudentCourseMarkService {
     public StudentCourseMarkDTO toDTO(StudentCourseMarkEntity entity) {
         StudentCourseMarkDTO dto = new StudentCourseMarkDTO();
         dto.setId(entity.getId());
-        dto.setCourseId(entity.getCourse());
-        dto.setStudentId(entity.getStudent());
+        dto.setCourseId(entity.getCourse().getId());
+        dto.setStudentId(entity.getStudent().getId());
         dto.setMark(entity.getMark());
         dto.setCreatedDate(entity.getCreatedDate());
         return dto;
@@ -171,8 +177,12 @@ public class StudentCourseMarkService {
     public StudentCourseMarkEntity toEntity(StudentCourseMarkDTO dto) {
         StudentCourseMarkEntity entity = new StudentCourseMarkEntity();
         entity.setCreatedDate(LocalDateTime.now());
-        entity.setCourse(dto.getCourseId());
-        entity.setStudent(dto.getStudentId());
+        CourseEntity course = new CourseEntity();
+        course.setId(dto.getCourseId());
+        entity.setCourse(course);
+        StudentEntity student = new StudentEntity();
+        student.setId(dto.getStudentId());
+        entity.setStudent(student);
         entity.setMark(dto.getMark());
         return entity;
     }
