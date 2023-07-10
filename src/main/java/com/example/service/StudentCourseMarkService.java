@@ -1,7 +1,5 @@
 package com.example.service;
 
-import com.example.dto.StudentDTO;
-import com.example.entity.StudentEntity;
 import com.example.mapper.DTOMapper;
 import com.example.mapper.SCMMapper;
 import com.example.dto.StudentCourseMarkDTO;
@@ -103,25 +101,6 @@ public class StudentCourseMarkService {
         return studentCourseMarkRepository.firstMark();
     }
 
-    public StudentCourseMarkDTO toDTO(StudentCourseMarkEntity entity) {
-        StudentCourseMarkDTO dto = new StudentCourseMarkDTO();
-        dto.setId(entity.getId());
-        dto.setCourseId(entity.getCourse());
-        dto.setStudentId(entity.getStudent());
-        dto.setMark(entity.getMark());
-        dto.setCreatedDate(entity.getCreatedDate());
-        return dto;
-    }
-
-    public StudentCourseMarkEntity toEntity(StudentCourseMarkDTO dto) {
-        StudentCourseMarkEntity entity = new StudentCourseMarkEntity();
-        entity.setCreatedDate(LocalDateTime.now());
-        entity.setCourse(dto.getCourseId());
-        entity.setStudent(dto.getStudentId());
-        entity.setMark(dto.getMark());
-        return entity;
-    }
-
     public Integer firstMarkByCourse(Integer course_id){
         return studentCourseMarkRepository.firstMarkByCourse(course_id);
     }
@@ -134,12 +113,12 @@ public class StudentCourseMarkService {
         return studentCourseMarkRepository.avgMark();
     }
 
-    public Integer avbByCourse(Integer course_id){
+    public Double avbByCourse(Integer course_id){
         return studentCourseMarkRepository.avbByCourse(course_id);
     }
 
-    public Integer maxMarkListByCourse(Integer course_id){
-        return studentCourseMarkRepository.maxMarkListByCourse(course_id);
+    public Integer maxMarkCountByCourse(Integer course_id){
+        return studentCourseMarkRepository.maxMarkCountByCourse(course_id);
     }
 
     public Integer maxMarkByCourse(Integer course_id){
@@ -178,4 +157,23 @@ public class StudentCourseMarkService {
 
 
 
+
+    public StudentCourseMarkDTO toDTO(StudentCourseMarkEntity entity) {
+        StudentCourseMarkDTO dto = new StudentCourseMarkDTO();
+        dto.setId(entity.getId());
+        dto.setCourseId(entity.getCourse());
+        dto.setStudentId(entity.getStudent());
+        dto.setMark(entity.getMark());
+        dto.setCreatedDate(entity.getCreatedDate());
+        return dto;
+    }
+
+    public StudentCourseMarkEntity toEntity(StudentCourseMarkDTO dto) {
+        StudentCourseMarkEntity entity = new StudentCourseMarkEntity();
+        entity.setCreatedDate(LocalDateTime.now());
+        entity.setCourse(dto.getCourseId());
+        entity.setStudent(dto.getStudentId());
+        entity.setMark(dto.getMark());
+        return entity;
+    }
 }

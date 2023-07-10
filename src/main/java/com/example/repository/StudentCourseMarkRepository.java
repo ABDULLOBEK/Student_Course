@@ -1,8 +1,6 @@
 package com.example.repository;
 
-import com.example.entity.CourseEntity;
 import com.example.entity.StudentCourseMarkEntity;
-import com.example.entity.StudentEntity;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -76,11 +74,11 @@ public interface StudentCourseMarkRepository extends CrudRepository<StudentCours
 
     //17
     @Query("select avg (s.mark) from StudentCourseMarkEntity as s where s.course=:course")
-    Integer avbByCourse(@Param("course") Integer course_id);
+    Double avbByCourse(@Param("course") Integer course_id);
 
     //18
     @Query("select count(s.mark) from StudentCourseMarkEntity as s where s.mark=(select max (sc.mark) from StudentCourseMarkEntity as sc where sc.course=:course)")
-    Integer maxMarkListByCourse(@Param("course") Integer course_id);
+    Integer maxMarkCountByCourse(@Param("course") Integer course_id);
 
     //19
     @Query("select s.mark from StudentCourseMarkEntity as s where s.course=:course order by s.course desc limit 1")
