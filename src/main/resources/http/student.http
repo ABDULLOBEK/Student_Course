@@ -46,3 +46,11 @@ GET localhost:8080/student/dates?dateI=2023-07-03&dateF=2023-07-04
 
 ### Get by pages
 GET localhost:8080/student/pagination?page=1&size=10
+
+### Filter
+POST localhost:8080/student/filter
+Content-Type: application/json
+
+{
+  "name": "bakit"
+}

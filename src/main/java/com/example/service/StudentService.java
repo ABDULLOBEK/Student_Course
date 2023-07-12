@@ -1,9 +1,13 @@
 package com.example.service;
 
+import com.example.dto.CourseDTO;
+import com.example.dto.CourseFilterDTO;
 import com.example.dto.StudentDTO;
+import com.example.dto.StudentFilterDTO;
 import com.example.entity.CourseEntity;
 import com.example.entity.StudentEntity;
 import com.example.exp.ItemNotFoundException;
+import com.example.repository.CustomStudentRepository;
 import com.example.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
@@ -25,6 +29,8 @@ public class StudentService {
 
     @Autowired
     private StudentRepository studentRepository;
+    @Autowired
+    private CustomStudentRepository customStudentRepository;
 
     public StudentDTO add(StudentDTO dto) {
         StudentEntity entity = toEntity(dto);
@@ -123,6 +129,17 @@ public class StudentService {
         return new PageImpl<>(studentDTOList, paging, pageObj.getTotalElements());
 
     }
+
+    public List<StudentDTO> filter(StudentFilterDTO filterDTO){
+        if(filterDTO.getCreatedDateFrom()!=null || filterDTO.getCreatedDateTo()!=null) {
+            LocalDateTime from = LocalDateTime.of(filterDTO.getCreatedDateFrom().toLocalDate(), LocalTime.MIN);
+            LocalDateTime to = LocalDateTime.of(filterDTO.getCreatedDateTo().toLocalDate(), LocalTime.MAX);
+            filterDTO.setCreatedDateTo(to);
+            filterDTO.setCreatedDateFrom(from);
+        }
+        return getStudentDTOS(customStudentRepository.filter(filterDTO));
+    }
+
 
 
 

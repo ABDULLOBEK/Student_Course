@@ -1,6 +1,9 @@
 package com.example.controller;
 
+import com.example.dto.CourseDTO;
+import com.example.dto.CourseFilterDTO;
 import com.example.dto.StudentDTO;
+import com.example.dto.StudentFilterDTO;
 import com.example.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -117,6 +120,13 @@ public class StudentController {
                                                @RequestParam(value = "size", defaultValue = "10") int size, String gender) {
         return ResponseEntity.ok(studentService.studentPaginationByGender(page - 1, size, gender));
     }
+
+    @PostMapping(value = "/filter")
+    public ResponseEntity<List<StudentDTO>> filter(@RequestBody StudentFilterDTO filterDTO){
+        List<StudentDTO> response = studentService.filter(filterDTO);
+        return ResponseEntity.ok(response);
+    }
+
 
 
 }
