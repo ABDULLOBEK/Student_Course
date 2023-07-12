@@ -1,11 +1,13 @@
 package com.example.service;
 
 import com.example.dto.CourseDTO;
+import com.example.dto.CourseFilterDTO;
 import com.example.dto.StudentDTO;
 import com.example.entity.CourseEntity;
 import com.example.entity.StudentEntity;
 import com.example.exp.ItemNotFoundException;
 import com.example.repository.CourseRepository;
+import com.example.repository.CustomCourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,8 @@ import java.util.stream.Collectors;
 public class CourseService  {
     @Autowired
     private CourseRepository courseRepository;
+    @Autowired
+    private CustomCourseRepository customCourseRepository;
 
     public CourseDTO add(CourseDTO dto) {
         CourseEntity entity = toEntity(dto);
@@ -51,19 +55,7 @@ public class CourseService  {
     public Boolean update(Integer id, CourseDTO dto) {
         int affectedRows = courseRepository.update(id, dto.getName(), dto.getDuration(), dto.getPrice());
         return affectedRows == 1;
-        /*Optional<CourseEntity> optional = courseRepository.findById(id);
-
-        if (optional.isPresent()) {
-            CourseEntity entity = optional.get();
-            entity.setName(dto.getName());
-            entity.setPrice(dto.getPrice());
-            entity.setDuration(dto.getDuration());
-
-            courseRepository.save(entity);
-            return true;
-        }
-        return false;
-*/}
+       }
 
     public Boolean delete(Integer id) {
         Optional<CourseEntity> optional = courseRepository.findById(id);
@@ -129,6 +121,16 @@ public class CourseService  {
         Page<CourseEntity> pageObj = courseRepository.findAllByPriceBetweenOrderByCreatedDate(priceI,priceF,pageable);
         List<CourseDTO> studentDTOList = pageObj.stream().map(this::toDTO).collect(Collectors.toList());
         return new PageImpl<>(studentDTOList, pageable, pageObj.getTotalElements());
+    }
+
+    public List<CourseDTO> filter(CourseFilterDTO filterDTO){
+        if(filterDTO.getCreatedDateFrom()!=null || filterDTO.getCreatedDateTo()!=null) {
+            LocalDateTime from = LocalDateTime.of(filterDTO.getCreatedDateFrom().toLocalDate(), LocalTime.MIN);
+            LocalDateTime to = LocalDateTime.of(filterDTO.getCreatedDateTo().toLocalDate(), LocalTime.MAX);
+            filterDTO.setCreatedDateTo(to);
+            filterDTO.setCreatedDateFrom(from);
+        }
+        return getCourseDTOS(customCourseRepository.filter(filterDTO));
     }
 
 

@@ -1,3 +1,215 @@
+POST http://localhost:8080/course/filter
+Content-Type: application/json
+
+{
+  "duration": "12 Month"
+}
+
+<> 2023-07-12T114344.200.json
+
+###
+
+POST http://localhost:8080/course/filter
+Content-Type: application/json
+
+{
+  "duration": "12 month"
+}
+
+<> 2023-07-12T114338.200.json
+
+###
+
+POST http://localhost:8080/course/filter
+Content-Type: application/json
+
+{
+  "createdDateFrom": "2023-07-04"
+}
+
+<> 2023-07-12T114322.400.json
+
+###
+
+POST http://localhost:8080/course/filter
+Content-Type: application/json
+
+{
+  "createdDateTo": "2023-07-04"
+}
+
+<> 2023-07-12T114316.400.json
+
+###
+
+POST http://localhost:8080/course/filter
+Content-Type: application/json
+
+{
+  "createdDate": "2023-07-04"
+}
+
+<> 2023-07-12T114226.200.json
+
+###
+
+POST http://localhost:8080/course/filter
+Content-Type: application/json
+
+{
+  "id": 1
+}
+
+<> 2023-07-12T114134.200.json
+
+###
+
+POST http://localhost:8080/course/filter
+Content-Type: application/json
+
+{
+  "id": 1
+}
+
+<> 2023-07-12T113926.500.json
+
+###
+
+POST http://localhost:8080/course/filter
+Content-Type: application/json
+
+{
+  "id": 1
+}
+
+<> 2023-07-12T113923.500.json
+
+###
+
+POST http://localhost:8080/course/filter
+Content-Type: application/json
+
+{
+  "id": 1,
+  "createdDateTo": "2023-07-04"
+}
+
+<> 2023-07-12T113910.400.json
+
+###
+
+POST http://localhost:8080/course/filter
+Content-Type: application/json
+
+{
+  "id": 1,
+  "createdDateTo": "2023-07-04"
+}
+
+<> 2023-07-12T113904.400.json
+
+###
+
+POST http://localhost:8080/course/filter
+Content-Type: application/json
+
+{
+  "createdDateTo": "2023-07-04"
+}
+
+<> 2023-07-12T113834.400.json
+
+###
+
+POST http://localhost:8080/course/filter
+Content-Type: application/json
+
+{
+  "createdDateFrom": "2023-07-04"
+}
+
+<> 2023-07-12T113808.400.json
+
+###
+
+POST http://localhost:8080/course/filter
+Content-Type: application/json
+
+{
+  "createdDateFrom": "2023-07-05"
+}
+
+<> 2023-07-12T113201.500.json
+
+###
+
+POST http://localhost:8080/course/filter
+Content-Type: application/json
+
+{
+  "createdDateFrom": "2023-07-05"
+}
+
+<> 2023-07-12T113154.500.json
+
+###
+
+POST http://localhost:8080/course/filter
+Content-Type: application/json
+
+{
+  "createdDateTo": "2023-07-05"
+}
+
+<> 2023-07-12T113104.500.json
+
+###
+
+POST http://localhost:8080/course/filter
+Content-Type: application/json
+
+{
+  "createdDate": "2023-07-04"
+}
+
+<> 2023-07-12T112958.200.json
+
+###
+
+POST http://localhost:8080/course/filter
+Content-Type: application/json
+
+{
+  "price": 12.24
+}
+
+<> 2023-07-12T112906.200.json
+
+###
+
+POST http://localhost:8080/course/filter
+Content-Type: application/json
+
+{
+
+  "name": "Ali"
+  }
+
+<> 2023-07-12T112844.200.json
+
+###
+
+POST http://localhost:8080/student/filter
+Content-Type: application/json
+
+{
+  "id": 1
+}
+
+<> 2023-07-12T112803.405.json
+
+###
+
 GET http://localhost:8080/mark/paginationByStudentID?page=1&size=3&student_id=1
 
 <> 2023-07-10T155115.200.json
@@ -193,173 +405,6 @@ Content-Type: application/json
 }
 
 <> 2023-07-10T153017.200.json
-
-###
-
-POST http://localhost:8080/mark/create
-Content-Type: application/json
-
-{
-  "studentId": 20,
-  "courseId": 2,
-  "mark": 5
-}
-
-<> 2023-07-10T152947.200.json
-
-###
-
-GET http://localhost:8080/mark/dto/1
-
-<> 2023-07-10T152901.200.json
-
-###
-
-GET http://localhost:8080/mark/1
-
-<> 2023-07-10T152856.200.json
-
-###
-
-PUT http://localhost:8080/mark/1
-Content-Type: application/json
-
-{
-  "mark": 3
-}
-
-<> 2023-07-10T152847.200.json
-
-###
-
-POST http://localhost:8080/mark/create
-Content-Type: application/json
-
-{
-  "studentId": 1,
-  "courseId": 2,
-  "mark": 5
-}
-
-<> 2023-07-10T152830.200.json
-
-###
-
-POST http://localhost:8080/mark/create
-Content-Type: application/json
-
-{
-  "studentId": 1,
-  "courseId": 2,
-  "mark": 5
-}
-
-<> 2023-07-10T151747.400.json
-
-###
-
-POST http://localhost:8080/mark/create
-Content-Type: application/json
-
-{
-  "studentId": 1,
-  "courseId": 2,
-  "mark": 5
-}
-
-<> 2023-07-10T151735.400.json
-
-###
-
-POST http://localhost:8080/mark/create
-Content-Type: application/json
-
-{
-  "studentId": 20,
-  "courseId": 2,
-  "mark": 5
-}
-
-<> 2023-07-10T151708.400.json
-
-###
-
-POST http://localhost:8080/mark/create
-Content-Type: application/json
-
-{
-  "studentId": 20,
-  "courseId": 2,
-  "mark": 5
-}
-
-<> 2023-07-10T150925.400.json
-
-###
-
-GET http://localhost:8080/course/pagination?page=1&size=2
-
-<> 2023-07-09T005848.200.json
-
-###
-
-GET http://localhost:8080/course/dates?dateI=2023-07-03&dateF=2023-07-04
-
-<> 2023-07-09T005817.200.json
-
-###
-
-GET http://localhost:8080/course/dates?dateI=2023-07-03&dateF=2023-07-04
-
-<> 2023-07-09T005524.500.json
-
-###
-
-GET http://localhost:8080/course/prices?priceI=10.0&priceF=12.25
-
-<> 2023-07-09T005514.200.json
-
-###
-
-GET http://localhost:8080/course/name?name=Ali
-
-<> 2023-07-09T005509.200.json
-
-###
-
-DELETE http://localhost:8080/course/4
-
-<> 2023-07-09T005501.200.txt
-
-###
-
-GET http://localhost:8080/course/4
-
-<> 2023-07-09T005451.200.json
-
-###
-
-PUT http://localhost:8080/course/4
-Content-Type: application/json
-
-{
-  "name": "Abdullo",
-  "price": 12.24
-}
-
-<> 2023-07-09T005441.200.json
-
-###
-
-GET http://localhost:8080/course/4
-
-<> 2023-07-09T005429.200.json
-
-###
-
-GET http://localhost:8080/course/1
-
-<> 2023-07-09T005420.200.json
 
 ###
 

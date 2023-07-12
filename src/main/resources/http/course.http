@@ -39,3 +39,12 @@ GET localhost:8080/course/dates?dateI=2023-07-03&dateF=2023-07-04
 
 ### Get by pages
 GET localhost:8080/course/pagination?page=1&size=2
+
+
+### Filter
+POST localhost:8080/course/filter
+Content-Type: application/json
+
+{
+  "duration": "12 Month"
+}
