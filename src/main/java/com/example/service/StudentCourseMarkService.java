@@ -1,5 +1,8 @@
 package com.example.service;
 
+import com.example.dto.StudentCourseMarkFilterDTO;
+import com.example.dto.StudentDTO;
+import com.example.dto.StudentFilterDTO;
 import com.example.entity.CourseEntity;
 import com.example.entity.StudentEntity;
 import com.example.mapper.DTOMapper;
@@ -7,6 +10,7 @@ import com.example.mapper.SCMMapper;
 import com.example.dto.StudentCourseMarkDTO;
 import com.example.entity.StudentCourseMarkEntity;
 import com.example.exp.ItemNotFoundException;
+import com.example.repository.CustomStudentCourseMarkRepository;
 import com.example.repository.StudentCourseMarkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
@@ -24,6 +28,8 @@ import java.util.stream.Collectors;
 public class StudentCourseMarkService {
     @Autowired
     private StudentCourseMarkRepository studentCourseMarkRepository;
+    @Autowired
+    private CustomStudentCourseMarkRepository customStudentCourseMarkRepository;
 
     public StudentCourseMarkDTO add(StudentCourseMarkDTO dto) {
         StudentCourseMarkEntity entity = toEntity(dto);
@@ -159,6 +165,16 @@ public class StudentCourseMarkService {
         Page<StudentCourseMarkEntity> pageObj = studentCourseMarkRepository.findAllByCourseOrderByCreatedDate(course,pageable);
         List<StudentCourseMarkDTO> studentCourseMarkDTOList = pageObj.stream().map(this::toDTO).toList();
         return new PageImpl<>(studentCourseMarkDTOList, pageable, pageObj.getTotalElements());
+    }
+
+    public List<StudentCourseMarkDTO> filter(StudentCourseMarkFilterDTO filterDTO){
+        if(filterDTO.getCreatedDateFrom()!=null || filterDTO.getCreatedDateTo()!=null) {
+            LocalDateTime from = LocalDateTime.of(filterDTO.getCreatedDateFrom().toLocalDate(), LocalTime.MIN);
+            LocalDateTime to = LocalDateTime.of(filterDTO.getCreatedDateTo().toLocalDate(), LocalTime.MAX);
+            filterDTO.setCreatedDateTo(to);
+            filterDTO.setCreatedDateFrom(from);
+        }
+        return (customStudentCourseMarkRepository.filter(filterDTO)).stream().map(this::toDTO).toList();
     }
 
 

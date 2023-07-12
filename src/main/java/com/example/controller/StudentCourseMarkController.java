@@ -2,6 +2,9 @@ package com.example.controller;
 
 
 import com.example.dto.StudentCourseMarkDTO;
+import com.example.dto.StudentCourseMarkFilterDTO;
+import com.example.dto.StudentDTO;
+import com.example.dto.StudentFilterDTO;
 import com.example.mapper.DTOMapper;
 import com.example.service.StudentCourseMarkService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -153,6 +156,12 @@ public class StudentCourseMarkController {
                                                 @RequestParam(value = "size", defaultValue = "10") int size,
                                                 @RequestParam("course_id") int course_id) {
         return ResponseEntity.ok(studentCourseMarkService.findAllByCourseOrderByCreatedDate(course_id,page - 1, size));
+    }
+
+    @PostMapping(value = "/filter")
+    public ResponseEntity<List<StudentCourseMarkDTO>> filter(@RequestBody StudentCourseMarkFilterDTO filterDTO){
+        List<StudentCourseMarkDTO> response = studentCourseMarkService.filter(filterDTO);
+        return ResponseEntity.ok(response);
     }
 
 

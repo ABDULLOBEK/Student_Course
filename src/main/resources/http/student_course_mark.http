@@ -67,6 +67,14 @@ GET localhost:8080/mark/paginationByStudentID?page=1&size=3&student_id=1
 ### Get by paginationByCourseID
 GET localhost:8080/mark/paginationByCourseID?page=1&size=3&student_id=1&course_id=2
 
+### Filter
+POST localhost:8080/mark/filter
+Content-Type: application/json
+
+{
+  "mark": 5
+}
+
 
 
 
